@@ -15,15 +15,9 @@ public class StudentsController {
         this.repository = repository;
     }
 
-    // Query for getting all email addresses associated with a given address
-    @GetMapping("/address/{address}")
-    public List<String> getEmailsByAddress(@PathVariable String address) {
-        return repository.findEmailsByAddress(address);
-    }
-
-    // Query for getting all email addresses associated with a given index
-    @GetMapping("/index/{index}")
-    public List<String> getEmailsByIndex(@PathVariable String index) {
-        return repository.findEmailsByIndex(index);
+    // Query for getting all email addresses associated with a given email address or index
+    @GetMapping("/{parameter}")
+    public List<String> getEmailsByParameter(@PathVariable String parameter) {
+        return repository.findEmailsByAddressOrIndex(parameter);
     }
 }

@@ -11,7 +11,10 @@ public interface StudentsRepository extends JpaRepository<Students, com.example.
     @Query(value = "WITH RECURSIVE StudentFinder AS ( " +
                    "    SELECT index, address " +
                    "    FROM students " +
-                   "    WHERE address = ?1 " +
+                   "    WHERE CASE " +
+                   "        WHEN ?1 LIKE '%@%' THEN address = ?1 " + // For email address
+                   "        ELSE index = ?1 " + // For student index
+                   "    END " +
                    "    UNION " +
                    "    SELECT o.index, o.address " +
                    "    FROM students o " +
@@ -20,19 +23,5 @@ public interface StudentsRepository extends JpaRepository<Students, com.example.
                    "SELECT DISTINCT address " +
                    "FROM StudentFinder " +
                    "ORDER BY address", nativeQuery = true)
-    List<String> findEmailsByAddress(String address);
-
-    @Query(value = "WITH RECURSIVE StudentFinder AS ( " +
-                   "    SELECT index, address " +
-                   "    FROM students " +
-                   "    WHERE index = ?1 " +
-                   "    UNION " +
-                   "    SELECT o.index, o.address " +
-                   "    FROM students o " +
-                   "    INNER JOIN StudentFinder po ON o.index = po.index OR o.address = po.address " +
-                   ") " +
-                   "SELECT DISTINCT address " +
-                   "FROM StudentFinder " +
-                   "ORDER BY address", nativeQuery = true)
-    List<String> findEmailsByIndex(String index);
+    List<String> findEmailsByAddressOrIndex(String parameter);
 }

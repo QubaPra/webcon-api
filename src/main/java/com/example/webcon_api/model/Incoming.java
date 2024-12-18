@@ -30,47 +30,23 @@ public class Incoming {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getMailerName() {
         return mailerName;
-    }
-
-    public void setMailerName(String mailerName) {
-        this.mailerName = mailerName;
     }
 
     public String getMessageId() {
         return messageId;
     }
 
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
-    }
-
     public Integer getDelivery() {
         return delivery;
-    }
-
-    public void setDelivery(Integer delivery) {
-        this.delivery = delivery;
     }
 
     public Integer getProcessed() {
         return processed;
     }
 
-    public void setProcessed(Integer processed) {
-        this.processed = processed;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }
